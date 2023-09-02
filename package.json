@@ -6,17 +6,20 @@
     "postcss": "8.4.29",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "tailwindcss": "3.3.3"
+    "tailwindcss": "3.3.3",
+    "ws": "8.13.0"
   },
   "devDependencies": {
     "@types/node": "20.5.8",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
+    "@types/ws": "8.5.5",
     "autoprefixer": "10.4.15",
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
     "knip": "2.21.1",
     "prettier": "3.0.3",
+    "tsx": "3.12.8",
     "typescript": "5.2.2",
     "vitest": "0.34.3"
   },
@@ -30,6 +33,7 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "start:ws": "tsx ./ws-server/index.ts"
   }
 }
