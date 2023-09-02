@@ -35,5 +35,6 @@
     "lint": "next lint",
     "start": "next start",
     "start:ws": "tsx ./ws-server/index.ts"
-  }
+  },
+  "type": "module"
 }
