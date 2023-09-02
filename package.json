@@ -34,6 +34,7 @@
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start",
+    "check:lint": "eslint .",
     "start:ws": "tsx ./ws-server/index.ts"
   }
 }
