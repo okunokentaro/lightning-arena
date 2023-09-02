@@ -19,7 +19,10 @@ export default function Home() {
     wsRef.current = socket;
 
     socket.addEventListener('message', (ev) => {
-      setMessage(ev.data);
+      if (typeof ev.data === 'string') {
+        setMessage(ev.data);
+        return;
+      }
     });
 
     return () => socket.close();
