@@ -1,5 +1,9 @@
 {
   "name": "universal",
   "private": true,
+  "scripts": {
+    "check:lint": "eslint .",
+    "check:typing": "tsc -p ./tsconfig.json --noEmit"
+  },
   "type": "module"
 }

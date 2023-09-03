@@ -11,6 +11,8 @@
   },
   "private": true,
   "scripts": {
+    "check:lint": "eslint .",
+    "check:typing": "tsc -p ./tsconfig.json --noEmit",
     "start": "tsx ./src/index.ts"
   },
   "type": "module"

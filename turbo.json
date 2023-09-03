@@ -4,6 +4,10 @@
     "build": {
       "outputs": ["./main/.next/**", "!./main/.next/cache/**"]
     },
-    "lint": {}
+    "check:lint": {},
+    "check:typing": {},
+    "check": {
+      "dependsOn": ["check:lint", "check:typing"]
+    }
   }
 }

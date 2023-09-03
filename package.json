@@ -24,9 +24,10 @@
   "license": "MPL 2.0",
   "private": true,
   "scripts": {
-    "check": "npm run check:typing && npm run check:lint",
-    "check:lint": "eslint .",
-    "check:typing": "tsc -p tsconfig.json --noEmit",
+    "build": "turbo build",
+    "check": "turbo check",
+    "check:lint": "turbo check:lint",
+    "check:typing": "turbo check:typing",
     "dev": "npm run dev -w main",
     "start:ws": "npm run start -w ws-server"
   },
