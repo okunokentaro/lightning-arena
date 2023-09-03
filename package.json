@@ -10,6 +10,7 @@
     "eslint-plugin-import-access": "2.1.1",
     "eslint-plugin-react": "7.33.2",
     "eslint-plugin-react-hooks": "4.6.0",
+    "eslint-plugin-tailwindcss": "3.13.0",
     "eslint-plugin-unused-imports": "3.0.0",
     "knip": "2.21.1",
     "prettier": "3.0.3",
@@ -31,7 +32,9 @@
     "dev": "npm run dev -w main",
     "dev:debug": "LA_ENABLED_LOCALHOST_DEBUG=1 npm run dev -w main",
     "start:ws": "npm run start -w ws-server",
-    "start:ws:debug": "LA_ENABLED_LOCALHOST_DEBUG=1 npm run start -w ws-server"
+    "start:ws:debug": "LA_ENABLED_LOCALHOST_DEBUG=1 npm run start -w ws-server",
+    "fix": "npm run list-changed-and-exists --silent | xargs eslint --fix .",
+    "list-changed-and-exists": "(git diff --name-only --cached && git diff --name-only) | sort | uniq | grep '\\.tsx\\?$' | xargs -I {} bash -c 'test -e \"$0\" && echo \"$0\"' {}"
   },
   "type": "module",
   "workspaces": [
