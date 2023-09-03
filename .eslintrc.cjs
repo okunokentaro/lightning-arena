@@ -42,6 +42,7 @@ module.exports = {
       },
     ],
     'import-access/jsdoc': ['error', { defaultImportability: 'package' }],
+    '@typescript-eslint/explicit-function-return-type': 'error',
     // eslint 側を無効にして typescript-eslint 側を有効
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': 'error',

@@ -10,14 +10,12 @@ import {
   useRef,
   useState,
 } from 'react';
+import { CreateArenaForm } from './create-arena-form';
 
 type Props = Readonly<{
   ip: string;
 }>;
 
-/**
- * @public
- */
 export function Sandbox({ ip }: Props): ReactElement {
   const [message, setMessage] = useState('');
   const [input, setInput] = useState('');
@@ -48,6 +46,7 @@ export function Sandbox({ ip }: Props): ReactElement {
 
   return (
     <div>
+      <CreateArenaForm ip={ip} />
       <QRCodeSVG includeMargin={true} value={codeText} />
 
       <h1>{JSON.stringify(message)}</h1>
@@ -55,7 +54,7 @@ export function Sandbox({ ip }: Props): ReactElement {
         <input
           className="text-zinc-800"
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e): void => setInput(e.target.value)}
         />
         <button>送信</button>
       </form>
