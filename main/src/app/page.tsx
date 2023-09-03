@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { getLocalIp } from 'universal/src/get-local-ip';
+import { getLocalIp } from 'universal/src';
 
 import { Sandbox } from '../client';
 
