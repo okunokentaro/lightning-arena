@@ -41,5 +41,8 @@
     "main",
     "universal",
     "ws-server"
-  ]
+  ],
+  "dependencies": {
+    "nanostores": "0.9.3"
+  }
 }
