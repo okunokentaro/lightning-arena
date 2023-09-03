@@ -1,12 +1,12 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Form } from './form';
+import { FormType } from './form-type';
 
 type Params = Readonly<{
-  setValue: ReturnType<typeof useForm<Form>>['setValue'];
-  xAccountId: Form['xAccountId'];
-  displayName: Form['displayName'];
+  setValue: ReturnType<typeof useForm<FormType>>['setValue'];
+  xAccountId: FormType['xAccountId'];
+  displayName: FormType['displayName'];
 }>;
 
 type Return = Readonly<{

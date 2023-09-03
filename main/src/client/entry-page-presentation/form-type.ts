@@ -1,4 +1,4 @@
-export type Form = Readonly<{
+export type FormType = Readonly<{
   xAccountId: string;
   displayName: string;
 }>;
