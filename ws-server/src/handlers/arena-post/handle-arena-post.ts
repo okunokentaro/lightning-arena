@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import { arenaAtom } from '../../models/arena';
+
+import { arenaAtom } from '../../domain/arena';
 
 /**
  * @public

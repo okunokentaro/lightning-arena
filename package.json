@@ -26,7 +26,7 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
-    "check": "turbo check --parallel",
+    "check": "turbo check --continue",
     "check:lint": "turbo check:lint --continue",
     "check:typing": "turbo check:typing --continue",
     "dev": "npm run dev -w main",

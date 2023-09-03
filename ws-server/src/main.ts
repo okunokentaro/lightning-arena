@@ -1,5 +1,4 @@
-import { prepareServer } from './prepare-server';
-import { prepareWebSocket } from './prepare-web-socket';
+import { prepareServer, prepareWebSocket } from './shared';
 
 export function main(): void {
   prepareServer();
