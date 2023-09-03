@@ -3,6 +3,7 @@ import { getLocalIp } from 'universal/src';
 
 import { arenaAtom } from '../../domain/arena';
 import { handle as handleArenaPost } from '../../handlers/arena-post/handle-arena-post';
+import { handle as handlePresentersPost } from '../../handlers/presenters-post/handle';
 import { handle as handleVerifyPinPost } from '../../handlers/verify-pin-post/handle-arena-post';
 import { handleError } from '../error';
 import { pinAtom } from '../pin';
@@ -23,6 +24,11 @@ export function prepareServer(): void {
   app.post(
     '/arena',
     handleError((req, res) => handleArenaPost(req, res)),
+  );
+
+  app.post(
+    '/presenters',
+    handleError((req, res) => handlePresentersPost(req, res)),
   );
 
   app.post(
