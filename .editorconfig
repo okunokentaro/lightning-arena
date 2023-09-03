@@ -10,5 +10,5 @@ end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.{js,ts,tsx}]
+[*.{js,cjs,mjs,ts,tsx}]
 quote_type = single
