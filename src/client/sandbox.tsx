@@ -15,9 +15,6 @@ type Props = Readonly<{
   ip: string;
 }>;
 
-/**
- * @public
- */
 export function Sandbox({ ip }: Props): ReactElement {
   const [message, setMessage] = useState('');
   const [input, setInput] = useState('');
