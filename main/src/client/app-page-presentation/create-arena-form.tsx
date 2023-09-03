@@ -25,10 +25,10 @@ export function CreateArenaForm({ ip }: Props): ReactElement {
   const save = useCallback(
     (data: Data) => {
       (async (): Promise<void> => {
-        await fetch(`http://${ip}:3001`, {
+        await fetch(`http://${ip}:3001/arena`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ data }),
+          body: JSON.stringify(data),
         });
         router.push('/arena');
       })().catch((e) => {
