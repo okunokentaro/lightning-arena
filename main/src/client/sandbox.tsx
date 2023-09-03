@@ -1,5 +1,6 @@
 'use client';
 
+import clsx from 'clsx';
 import { QRCodeSVG } from 'qrcode.react';
 import {
   FormEvent,
@@ -10,7 +11,6 @@ import {
   useRef,
   useState,
 } from 'react';
-import { CreateArenaForm } from './create-arena-form';
 
 type Props = Readonly<{
   ip: string;
@@ -45,19 +45,26 @@ export function Sandbox({ ip }: Props): ReactElement {
   const codeText = `http://${ip}:3000`;
 
   return (
-    <div>
-      <CreateArenaForm ip={ip} />
-      <QRCodeSVG includeMargin={true} value={codeText} />
+    <div
+      className={clsx(
+        'mx-auto max-w-3xl rounded-xl p-10',
+        'border border-slate-300 dark:border-slate-900',
+        'bg-slate-200 dark:bg-slate-700',
+      )}
+    >
+      <div className="p-20">
+        <QRCodeSVG includeMargin={true} value={codeText} />
 
-      <h1>{JSON.stringify(message)}</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          className="text-zinc-800"
-          value={input}
-          onChange={(e): void => setInput(e.target.value)}
-        />
-        <button>送信</button>
-      </form>
+        <h1>{JSON.stringify(message)}</h1>
+        <form onSubmit={handleSubmit}>
+          <input
+            className="text-zinc-800"
+            value={input}
+            onChange={(e): void => setInput(e.target.value)}
+          />
+          <button>送信</button>
+        </form>
+      </div>
     </div>
   );
 }
