@@ -13,7 +13,7 @@
   "scripts": {
     "check:lint": "eslint .",
     "check:typing": "tsc -p ./tsconfig.json --noEmit",
-    "start": "tsx ./src/index.ts"
+    "start": "tsx index.ts"
   },
   "type": "module"
 }
