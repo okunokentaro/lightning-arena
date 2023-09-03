@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 
-import { getLocalIp } from '../../universal';
+import { getLocalIp } from '../../../universal/src';
 import { Sandbox } from '../client';
 
 export default function AppPage(): ReactElement {

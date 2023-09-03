@@ -48,7 +48,7 @@
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start",
-    "start:ws": "tsx ./ws-server/index.ts"
+    "start:ws": "tsx ws-server/src/index.ts"
   },
   "type": "module"
 }
