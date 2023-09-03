@@ -52,7 +52,7 @@ export function Sandbox({ ip }: Props): ReactElement {
         <input
           className="text-zinc-800"
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e): void => setInput(e.target.value)}
         />
         <button>送信</button>
       </form>
