@@ -21,7 +21,7 @@ export function EntryForm(): ReactElement {
   const xAccountId = watch('xAccountId'); // no useMemo
   const displayName = watch('displayName'); // no useMemo
 
-  useSyncFields({ setValue, xAccountId, displayName });
+  const { desync } = useSyncFields({ setValue, xAccountId, displayName });
 
   const disabled = useMemo(() => {
     return xAccountId === '' && displayName === '';
@@ -102,6 +102,7 @@ export function EntryForm(): ReactElement {
                 'bg-slate-100 dark:bg-slate-900 dark:placeholder:text-slate-400',
                 'ring-1 ring-inset ring-slate-500 focus:outline-0 focus:ring-2 focus:ring-inset focus:ring-sky-400',
               )}
+              onFocus={desync}
             />
           </div>
         </div>
