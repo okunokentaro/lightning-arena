@@ -1,9 +1,9 @@
 /**
  * @public
  */
-export { getLocalIp } from './get-local-ip';
+export { PreconditionError } from './precondition-error';
 
 /**
  * @public
  */
-export { PreconditionError } from './precondition-error';
+export { getLocalIp } from './get-local-ip';

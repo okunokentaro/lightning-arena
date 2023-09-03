@@ -14,7 +14,7 @@ export function prepareServer(): void {
   app.use(handleError((req, res, next) => allowCrossOrigin(req, res, next)));
 
   app.get('/', (req, res) => {
-    res.send(JSON.stringify(arenaAtom.get()));
+    res.send(arenaAtom.get());
   });
 
   app.post(

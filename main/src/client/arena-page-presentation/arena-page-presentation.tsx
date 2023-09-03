@@ -4,17 +4,19 @@ import clsx from 'clsx';
 import { QRCodeSVG } from 'qrcode.react';
 import { ReactElement } from 'react';
 
+import { Arena } from '../../server/fetch-arena';
+
 type Props = Readonly<{
   ip: string;
-  json: unknown;
+  arena: Arena;
 }>;
 
-export function ArenaPagePresentation({ ip }: Props): ReactElement {
+export function ArenaPagePresentation({ ip, arena }: Props): ReactElement {
   const codeText = `http://${ip}:3000/entry`;
 
   return (
     <div className="h-screen w-full p-20">
-      <h1 className="text-6xl font-bold">イベントのタイトル</h1>
+      <h1 className="text-6xl font-bold">{arena.title}</h1>
       <div className="flex h-full items-center justify-center">
         <div
           className={clsx(

@@ -13,9 +13,7 @@ export function CreateArenaForm({ ip }: Props): ReactElement {
   const router = useRouter();
   const { register, handleSubmit, watch } = useForm<
     Readonly<{ title: string; hashTags: string }>
-  >({
-    defaultValues: { title: '', hashTags: '' },
-  });
+  >({ defaultValues: { title: '', hashTags: '' } });
 
   const title = watch('title'); // no useMemo
 
@@ -30,7 +28,7 @@ export function CreateArenaForm({ ip }: Props): ReactElement {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data),
         });
-        router.push('/arena');
+        router.push(`/arena?${Date.now()}`);
       })().catch((e) => {
         throw e;
       });

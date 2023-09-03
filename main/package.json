@@ -2,6 +2,7 @@
   "name": "main",
   "dependencies": {
     "clsx": "2.0.0",
+    "json-schema-to-ts": "2.9.2",
     "next": "13.4.19",
     "postcss": "8.4.29",
     "qrcode.react": "3.1.0",
