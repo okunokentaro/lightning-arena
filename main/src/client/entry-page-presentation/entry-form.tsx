@@ -2,24 +2,39 @@
 
 import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
-import { ReactElement, useCallback, useMemo } from 'react';
+import { ReactElement, useCallback, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 
 type Props = Readonly<{
   ip: string;
 }>;
 
-export function CreateArenaForm({ ip }: Props): ReactElement {
+export function EntryForm({ ip }: Props): ReactElement {
   const router = useRouter();
-  const { register, handleSubmit, watch } = useForm<
-    Readonly<{ title: string; hashTags: string }>
+  const { register, handleSubmit, watch, setValue } = useForm<
+    Readonly<{ xAccountId: string; displayName: string }>
   >({
-    defaultValues: { title: '', hashTags: '' },
+    defaultValues: { xAccountId: '', displayName: '' },
   });
 
-  const title = watch('title'); // no useMemo
+  const xAccountId = watch('xAccountId'); // no useMemo
+  const displayName = watch('displayName'); // no useMemo
 
-  const disabled = useMemo(() => [title].some((v) => v === ''), [title]);
+  useEffect(() => {
+    if (xAccountId.slice(0, -1) === displayName) {
+      setValue('displayName', xAccountId);
+      return;
+    }
+    if (xAccountId === displayName.slice(0, -1)) {
+      setValue('displayName', xAccountId);
+      return;
+    }
+    // noop
+  }, [xAccountId, displayName, setValue]);
+
+  const disabled = useMemo(() => {
+    return xAccountId === '' && displayName === '';
+  }, [xAccountId, displayName]);
 
   type Data = Parameters<Parameters<typeof handleSubmit>[0]>[0];
   const save = useCallback(
@@ -46,7 +61,13 @@ export function CreateArenaForm({ ip }: Props): ReactElement {
         'bg-slate-200 dark:bg-slate-700',
       )}
     >
-      <h1 className="text-2xl font-semibold">新規アリーナ</h1>
+      <div className={clsx('flex flex-col gap-4')}>
+        <h1 className="text-2xl font-semibold">エントリーする</h1>
+        <p>
+          Xアカウント名を入力してください。お持ちでない場合、非公開にしたい場合は名前を入力してください。
+        </p>
+      </div>
+
       <form
         className={clsx('flex flex-col gap-6')}
         onSubmit={(ev): void => {
@@ -57,15 +78,15 @@ export function CreateArenaForm({ ip }: Props): ReactElement {
       >
         <div>
           <label
-            htmlFor="CreateArenaFormTitle"
+            htmlFor="EntryFormXAccount"
             className="block text-sm font-medium leading-6"
           >
-            タイトル
+            Xアカウント名
           </label>
           <input
-            id="CreateArenaFormTitle"
-            {...register('title', { required: true })}
-            placeholder="夏のLT発表会"
+            id="EntryFormXAccount"
+            {...register('xAccountId')}
+            placeholder="lightning83"
             className={clsx(
               'block w-full rounded-md border-0 px-3 leading-10 shadow-sm',
               'bg-slate-100 dark:bg-slate-900 dark:placeholder:text-slate-400',
@@ -76,15 +97,15 @@ export function CreateArenaForm({ ip }: Props): ReactElement {
 
         <div>
           <label
-            htmlFor="CreateArenaFormHashTags"
+            htmlFor="EntryFormName"
             className="block text-sm font-medium leading-6"
           >
-            ハッシュタグ（複数ある場合はスペースで区切る）
+            名前
           </label>
           <input
-            id="CreateArenaFormHashTags"
-            {...register('hashTags')}
-            placeholder="summar_lt dev_event"
+            id="EntryFormName"
+            {...register('displayName')}
+            placeholder="ライトニング"
             className={clsx(
               'block w-full rounded-md border-0 px-3 leading-10 shadow-sm',
               'bg-slate-100 dark:bg-slate-900 dark:placeholder:text-slate-400',
@@ -92,6 +113,8 @@ export function CreateArenaForm({ ip }: Props): ReactElement {
             )}
           />
         </div>
+
+        <p>内容はあとから変更できます。</p>
 
         <button
           type="submit"
@@ -103,7 +126,7 @@ export function CreateArenaForm({ ip }: Props): ReactElement {
               : 'bg-sky-600 text-white shadow-sm hover:bg-sky-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400 active:bg-sky-800',
           )}
         >
-          アリーナを開設
+          エントリー
         </button>
       </form>
     </div>
