@@ -1,4 +1,5 @@
 import { networkInterfaces } from 'os';
+
 import { Sandbox } from '@/client/sandbox';
 
 type NetworkInterfacesReturn = ReturnType<typeof networkInterfaces>;

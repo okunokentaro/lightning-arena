@@ -6,7 +6,6 @@ wss.on('connection', (ws: WebSocket) => {
   console.info('connected');
 
   ws.on('message', (data, isBinary) => {
-    console.log('data', data);
     wss.clients.forEach((c) => {
       if (c.readyState === WebSocket.OPEN) {
         c.send(data, { binary: isBinary });

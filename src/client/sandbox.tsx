@@ -1,5 +1,6 @@
 'use client';
 
+import { QRCodeSVG } from 'qrcode.react';
 import {
   FormEvent,
   FormEventHandler,
@@ -9,26 +10,30 @@ import {
   useRef,
   useState,
 } from 'react';
-import { QRCodeSVG } from 'qrcode.react';
 
 type Props = Readonly<{
   ip: string;
 }>;
 
+/**
+ * @public
+ */
 export function Sandbox({ ip }: Props): ReactElement {
   const [message, setMessage] = useState('');
   const [input, setInput] = useState('');
   const wsRef = useRef<WebSocket>(new WebSocket(`ws://${ip}:7777`));
 
   useEffect(() => {
-    wsRef.current.addEventListener('message', (ev) => {
+    const socket = wsRef.current;
+
+    socket.addEventListener('message', (ev) => {
       if (typeof ev.data === 'string') {
         setMessage(ev.data);
         return;
       }
     });
 
-    return () => wsRef.current.close();
+    return () => socket.close();
   }, []);
 
   const handleSubmit: FormEventHandler = useCallback(
