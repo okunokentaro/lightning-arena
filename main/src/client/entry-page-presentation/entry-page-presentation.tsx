@@ -2,7 +2,7 @@
 
 import { ReactElement } from 'react';
 import { ipAtom } from '../ip-atom';
-import { EntryForm } from './entry-form';
+import { Form } from './form';
 
 type Props = Readonly<{
   ip: string;
@@ -10,5 +10,5 @@ type Props = Readonly<{
 
 export function EntryPagePresentation({ ip }: Props): ReactElement {
   ipAtom.set(ip);
-  return <EntryForm />;
+  return <Form />;
 }
