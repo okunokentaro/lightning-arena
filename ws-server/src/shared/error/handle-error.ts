@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 
 import { BadRequestError } from './bad-request-error';
+import { ForbiddenError } from './forbidden-error';
 import { InternalServerError } from './internal-server-error';
 
 type Callback = (
@@ -24,6 +25,12 @@ export function handleError(
 
         if (e instanceof BadRequestError) {
           res.status(400).end(e.message);
+          next(e);
+          return;
+        }
+
+        if (e instanceof ForbiddenError) {
+          res.status(403).end(e.message);
           next(e);
           return;
         }

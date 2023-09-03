@@ -1,13 +1,21 @@
 'use client';
 
-import { ReactElement } from 'react';
-
-import { CreateArenaForm } from './create-arena-form';
+import { useRouter } from 'next/navigation';
+import { ReactElement, useEffect } from 'react';
+import { useLocalStorage } from 'usehooks-ts';
 
 type Props = Readonly<{
-  ip: string;
+  pin: string;
 }>;
 
-export function AppPagePresentation({ ip }: Props): ReactElement {
-  return <CreateArenaForm ip={ip} />;
+export function AppPagePresentation({ pin }: Props): ReactElement {
+  const router = useRouter();
+  const [, setPin] = useLocalStorage('laPin', '');
+
+  useEffect(() => {
+    setPin(pin);
+    router.push('/create-arena');
+  }, [pin, router, setPin]);
+
+  return <></>;
 }

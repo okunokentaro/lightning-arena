@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Form } from './form';
@@ -9,25 +9,29 @@ type Params = Readonly<{
   displayName: Form['displayName'];
 }>;
 
+type Return = Readonly<{
+  desync: () => void;
+}>;
+
 export function useSyncFields({
   setValue,
   xAccountId,
   displayName,
-}: Params): void {
-  const [isSync, setIsSync] = useState(false);
+}: Params): Return {
+  const [isSync, setIsSync] = useState<boolean>(false);
+  const desync = useCallback(() => setIsSync(false), []);
 
   useEffect(() => {
-    if (!isSync && xAccountId.length === 0 && 1 <= displayName.length) {
-      return;
-    }
     if (
-      xAccountId.slice(0, -1) === displayName ||
-      xAccountId === displayName.slice(0, -1)
+      (xAccountId.slice(0, -1) === displayName && displayName === '') ||
+      (isSync && xAccountId.slice(0, -1) === displayName) ||
+      (isSync && xAccountId === displayName.slice(0, -1))
     ) {
-      setIsSync(1 <= xAccountId.length);
       setValue('displayName', xAccountId);
+      setIsSync(true);
       return;
     }
-    // noop
-  }, [xAccountId, displayName, setValue, isSync]);
+  }, [setValue, xAccountId, displayName, isSync]);
+
+  return useMemo(() => ({ desync }), [desync]);
 }

@@ -1,19 +1,19 @@
 'use client';
 
+import { useStore } from '@nanostores/react';
 import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 import { ReactElement, useCallback, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { ipAtom } from '../ip-atom';
 import { Form } from './form';
 import { useSyncFields } from './use-sync-fields';
 
-type Props = Readonly<{
-  ip: string;
-}>;
-
-export function EntryForm({ ip }: Props): ReactElement {
+export function EntryForm(): ReactElement {
+  const ip = useStore(ipAtom);
   const router = useRouter();
+
   const { register, handleSubmit, watch, setValue } = useForm<Form>({
     defaultValues: { xAccountId: '', displayName: '' },
   });
@@ -21,7 +21,7 @@ export function EntryForm({ ip }: Props): ReactElement {
   const xAccountId = watch('xAccountId'); // no useMemo
   const displayName = watch('displayName'); // no useMemo
 
-  useSyncFields({ setValue, xAccountId, displayName });
+  const { desync } = useSyncFields({ setValue, xAccountId, displayName });
 
   const disabled = useMemo(() => {
     return xAccountId === '' && displayName === '';
@@ -102,6 +102,7 @@ export function EntryForm({ ip }: Props): ReactElement {
                 'bg-slate-100 dark:bg-slate-900 dark:placeholder:text-slate-400',
                 'ring-1 ring-inset ring-slate-500 focus:outline-0 focus:ring-2 focus:ring-inset focus:ring-sky-400',
               )}
+              onFocus={desync}
             />
           </div>
         </div>

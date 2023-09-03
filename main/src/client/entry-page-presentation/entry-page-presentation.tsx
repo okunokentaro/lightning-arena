@@ -1,6 +1,7 @@
 'use client';
 
 import { ReactElement } from 'react';
+import { ipAtom } from '../ip-atom';
 import { EntryForm } from './entry-form';
 
 type Props = Readonly<{
@@ -8,5 +9,6 @@ type Props = Readonly<{
 }>;
 
 export function EntryPagePresentation({ ip }: Props): ReactElement {
-  return <EntryForm ip={ip} />;
+  ipAtom.set(ip);
+  return <EntryForm />;
 }
