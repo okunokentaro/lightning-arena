@@ -10,6 +10,7 @@ import {
   useRef,
   useState,
 } from 'react';
+import { CreateArenaForm } from './create-arena-form';
 
 type Props = Readonly<{
   ip: string;
@@ -45,6 +46,7 @@ export function Sandbox({ ip }: Props): ReactElement {
 
   return (
     <div>
+      <CreateArenaForm ip={ip} />
       <QRCodeSVG includeMargin={true} value={codeText} />
 
       <h1>{JSON.stringify(message)}</h1>
