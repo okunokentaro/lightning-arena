@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
+import { getLocalIp } from 'universal/src/get-local-ip';
 import { URL } from 'url';
-
-import { getLocalIp } from '../../universal/src';
 
 export const allowList: RegExp[] = [
   /^http:\/\/localhost:3000$/,

@@ -1,26 +1,9 @@
 {
   "name": "lightning-arena",
   "version": "0.0.0",
-  "dependencies": {
-    "express": "4.18.2",
-    "next": "13.4.19",
-    "postcss": "8.4.29",
-    "qrcode.react": "3.1.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-hook-form": "7.45.4",
-    "tailwindcss": "3.3.3",
-    "ws": "8.13.0"
-  },
   "devDependencies": {
-    "@types/express": "4.17.17",
-    "@types/node": "20.5.8",
-    "@types/react": "18.2.21",
-    "@types/react-dom": "18.2.7",
-    "@types/ws": "8.5.5",
     "@typescript-eslint/eslint-plugin": "6.5.0",
     "@typescript-eslint/parser": "6.5.0",
-    "autoprefixer": "10.4.15",
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
     "eslint-config-prettier": "9.0.0",
@@ -30,7 +13,6 @@
     "eslint-plugin-unused-imports": "3.0.0",
     "knip": "2.21.1",
     "prettier": "3.0.3",
-    "tsx": "3.12.8",
     "typescript": "5.2.2",
     "vitest": "0.34.3"
   },
@@ -41,14 +23,16 @@
   "license": "MPL 2.0",
   "private": true,
   "scripts": {
-    "build": "next build",
     "check": "npm run check:typing && npm run check:lint",
     "check:lint": "eslint .",
     "check:typing": "tsc -p tsconfig.json --noEmit",
-    "dev": "next dev",
-    "lint": "next lint",
-    "start": "next start",
-    "start:ws": "tsx ws-server/src/index.ts"
+    "dev": "npm run dev -w main",
+    "start:ws": "npm run start -w ws-server"
   },
-  "type": "module"
+  "type": "module",
+  "workspaces": [
+    "main",
+    "universal",
+    "ws-server"
+  ]
 }
