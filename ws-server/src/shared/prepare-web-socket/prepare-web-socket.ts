@@ -2,14 +2,13 @@ import { WebSocket, WebSocketServer } from 'ws';
 
 const port = 7777;
 
-export function prepareWebSocket(storeRef: unknown[]): void {
+export function prepareWebSocket(): void {
   const wss = new WebSocketServer({ port });
 
   wss.on('connection', (ws: WebSocket) => {
     console.info('connected');
 
     ws.on('message', (data, isBinary) => {
-      storeRef.push(data);
       wss.clients.forEach((c) => {
         if (c.readyState === WebSocket.OPEN) {
           c.send(data, { binary: isBinary });
