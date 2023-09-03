@@ -14,7 +14,8 @@
   "scripts": {
     "check:lint": "eslint .",
     "check:typing": "tsc -p ./tsconfig.json --noEmit",
-    "start": "tsx index.ts"
+    "dev": "tsx watch ./",
+    "start": "tsx ./index.ts"
   },
   "type": "module"
 }
