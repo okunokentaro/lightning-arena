@@ -5,14 +5,20 @@ import { QRCodeSVG } from 'qrcode.react';
 import { ReactElement } from 'react';
 
 import { Arena } from '../../server/fetch-arena';
+import { ipAtom } from '../ip-atom';
 
 type Props = Readonly<{
   ip: string;
-  arena: Arena;
+  arena: Arena | null;
 }>;
 
 export function ArenaPagePresentation({ ip, arena }: Props): ReactElement {
+  ipAtom.set(ip);
   const codeText = `http://${ip}:3000/entry`;
+
+  if (!arena) {
+    return <h1>まだアリーナが開設されていません。</h1>;
+  }
 
   return (
     <div className="h-screen w-full p-20">

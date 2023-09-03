@@ -1,9 +1,37 @@
+import { FromSchema, JSONSchema7 } from 'json-schema-to-ts';
+import { redirect } from 'next/navigation';
 import { ReactElement } from 'react';
-import { getLocalIp } from 'universal/src';
 
+import { AssertValidJsonError } from 'universal/src/assert-valid-json';
 import { AppPagePresentation } from '../client';
+import { assertValidJson } from '../utils/assert-valid-json';
 
-export default function AppPage(): ReactElement {
-  const ip = getLocalIp();
-  return <AppPagePresentation ip={ip} />;
+type Params = Readonly<{
+  searchParams: Record<string, string | string[] | undefined>;
+}>;
+
+const schema = {
+  $schema: 'http://json-schema.org/draft-07/schema#',
+  type: 'object',
+  additionalProperties: false,
+  required: ['pin'],
+  properties: {
+    pin: {
+      type: 'string',
+      minLength: 4,
+      maxLength: 4,
+    },
+  },
+} as const satisfies JSONSchema7;
+
+export default function AppPage({ searchParams }: Params): ReactElement {
+  try {
+    assertValidJson<FromSchema<typeof schema>>(schema, searchParams);
+  } catch (e) {
+    if (e instanceof AssertValidJsonError) {
+      redirect('/arena');
+    }
+    throw e;
+  }
+  return <AppPagePresentation pin={searchParams.pin} />;
 }

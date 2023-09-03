@@ -1,16 +1,17 @@
 'use client';
 
+import { useStore } from '@nanostores/react';
 import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 import { ReactElement, useCallback, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 
-type Props = Readonly<{
-  ip: string;
-}>;
+import { ipAtom } from '../ip-atom';
 
-export function CreateArenaForm({ ip }: Props): ReactElement {
+export function CreateArenaForm(): ReactElement {
+  const ip = useStore(ipAtom);
   const router = useRouter();
+
   const { register, handleSubmit, watch } = useForm<
     Readonly<{ title: string; hashTags: string }>
   >({ defaultValues: { title: '', hashTags: '' } });

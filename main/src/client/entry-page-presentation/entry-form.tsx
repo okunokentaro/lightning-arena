@@ -1,19 +1,19 @@
 'use client';
 
+import { useStore } from '@nanostores/react';
 import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 import { ReactElement, useCallback, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { ipAtom } from '../ip-atom';
 import { Form } from './form';
 import { useSyncFields } from './use-sync-fields';
 
-type Props = Readonly<{
-  ip: string;
-}>;
-
-export function EntryForm({ ip }: Props): ReactElement {
+export function EntryForm(): ReactElement {
+  const ip = useStore(ipAtom);
   const router = useRouter();
+
   const { register, handleSubmit, watch, setValue } = useForm<Form>({
     defaultValues: { xAccountId: '', displayName: '' },
   });
