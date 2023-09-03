@@ -26,9 +26,9 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
-    "check": "turbo check",
-    "check:lint": "turbo check:lint",
-    "check:typing": "turbo check:typing",
+    "check": "turbo check --parallel",
+    "check:lint": "turbo check:lint --continue",
+    "check:typing": "turbo check:typing --continue",
     "dev": "npm run dev -w main",
     "dev:debug": "LA_ENABLED_LOCALHOST_DEBUG=1 npm run dev -w main",
     "fix": "npm run list-changed-and-exists --silent | xargs eslint --fix .",

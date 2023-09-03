@@ -3,7 +3,12 @@ import { getLocalIp } from 'universal/src';
 
 import { ArenaPagePresentation } from '../../client';
 
-export default function ArenaPage(): ReactElement {
+export default async function ArenaPage(): Promise<ReactElement> {
   const ip = getLocalIp();
-  return <ArenaPagePresentation ip={ip} />;
+
+  const res = await fetch(`http://${ip}:3001`, { method: 'GET' });
+  const json = await res.json();
+  console.log(json);
+
+  return <ArenaPagePresentation ip={ip} json={json} />;
 }
