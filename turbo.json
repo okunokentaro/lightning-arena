@@ -6,8 +6,9 @@
     },
     "check:lint": {},
     "check:typing": {},
+    "test:run": {},
     "check": {
-      "dependsOn": ["check:lint", "check:typing"]
+      "dependsOn": ["check:lint", "check:typing", "test:run"]
     }
   }
 }

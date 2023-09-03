@@ -1,4 +1,5 @@
 import { WebSocket, WebSocketServer } from 'ws';
+import { presentersAtom } from '../../domain/presenter';
 
 const port = 7777;
 
@@ -7,6 +8,15 @@ export function prepareWebSocket(): void {
 
   wss.on('connection', (ws: WebSocket) => {
     console.info('connected');
+
+    const disposePresenters = presentersAtom.listen((v) => {
+      wss.clients.forEach((c) => {
+        if (c.readyState === WebSocket.OPEN) {
+          c.send(JSON.stringify(v));
+          return;
+        }
+      });
+    });
 
     ws.on('message', (data, isBinary) => {
       wss.clients.forEach((c) => {
@@ -17,7 +27,10 @@ export function prepareWebSocket(): void {
       });
     });
 
-    ws.on('close', () => console.info('closed'));
+    ws.on('close', () => {
+      disposePresenters();
+      console.info('closed');
+    });
   });
 
   console.info(`Web socket server has started on port ${port}`);
