@@ -1,7 +1,9 @@
 import { WebSocket, WebSocketServer } from 'ws';
 
+const port = 7777;
+
 export function prepareWebSocket(storeRef: unknown[]): void {
-  const wss = new WebSocketServer({ port: 7777 });
+  const wss = new WebSocketServer({ port });
 
   wss.on('connection', (ws: WebSocket) => {
     console.info('connected');
@@ -18,4 +20,6 @@ export function prepareWebSocket(storeRef: unknown[]): void {
 
     ws.on('close', () => console.info('closed'));
   });
+
+  console.info(`Web socket server has started on port ${port}`);
 }

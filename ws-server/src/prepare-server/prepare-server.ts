@@ -2,9 +2,10 @@ import express from 'express';
 
 import { allowCrossOrigin } from './allow-cross-origin';
 
+const port = 3001;
+
 export function prepareServer(storeRef: unknown[]): void {
   const app = express();
-  const port = 3001;
 
   app.use(express.json());
   app.use(allowCrossOrigin);
@@ -19,6 +20,6 @@ export function prepareServer(storeRef: unknown[]): void {
   });
 
   app.listen(port, () => {
-    console.info(`Example app listening on port ${port}`);
+    console.info(`App listening on port ${port}`);
   });
 }
