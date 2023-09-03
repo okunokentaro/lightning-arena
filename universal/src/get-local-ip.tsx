@@ -5,6 +5,9 @@ type Info = NonNullable<Interfaces[keyof Interfaces]>;
 
 const env = true; // @TODO 設定変更可能にする
 
+/**
+ * @public
+ */
 export function getLocalIp(): string {
   if (env) {
     return 'localhost';
