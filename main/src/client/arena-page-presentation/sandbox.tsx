@@ -42,7 +42,7 @@ export function Sandbox({ ip }: Props): ReactElement {
     [input],
   );
 
-  const codeText = `http://${ip}:3000`;
+  const codeText = `http://${ip}:3000/arena`;
 
   return (
     <div
