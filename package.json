@@ -29,7 +29,9 @@
     "check:lint": "turbo check:lint",
     "check:typing": "turbo check:typing",
     "dev": "npm run dev -w main",
-    "start:ws": "npm run start -w ws-server"
+    "dev:debug": "LA_ENABLED_LOCALHOST_DEBUG=1 npm run dev -w main",
+    "start:ws": "npm run start -w ws-server",
+    "start:ws:debug": "LA_ENABLED_LOCALHOST_DEBUG=1 npm run start -w ws-server"
   },
   "type": "module",
   "workspaces": [

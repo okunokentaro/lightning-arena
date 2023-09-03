@@ -1,15 +1,12 @@
 import { networkInterfaces } from 'os';
 
+import { isEnabledLocalhost } from './is-enabled-localhost';
+
 type Interfaces = ReturnType<typeof networkInterfaces>;
 type Info = NonNullable<Interfaces[keyof Interfaces]>;
 
-const env = true; // @TODO 設定変更可能にする
-
-/**
- * @public
- */
 export function getLocalIp(): string {
-  if (env) {
+  if (isEnabledLocalhost) {
     return 'localhost';
   }
 

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { getLocalIp } from 'universal/src/get-local-ip';
+import { getLocalIp } from 'universal/src';
 import { URL } from 'url';
 
 export const allowList: RegExp[] = [
