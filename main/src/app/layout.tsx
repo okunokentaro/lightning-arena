@@ -20,7 +20,7 @@ export default function RootLayout({
       <body
         className={clsx(
           inter.className,
-          'flex h-screen items-center justify-center p-4',
+          'h-screen w-full',
           'text-slate-800 dark:text-slate-50',
           'bg-slate-100 dark:bg-slate-800',
         )}

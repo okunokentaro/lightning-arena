@@ -55,10 +55,6 @@ module.exports = {
     '@next/next/no-html-link-for-pages': 'off',
     'react-hooks/rules-of-hooks': 'error',
     'react/react-in-jsx-scope': 'off',
-    'tailwindcss/no-custom-classname': [
-      'error',
-      { whitelist: ['^twIgnore.*'] },
-    ],
     // eslint 側を無効にして typescript-eslint 側を有効
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': 'error',

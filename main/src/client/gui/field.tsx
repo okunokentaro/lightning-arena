@@ -21,7 +21,7 @@ export const Field = forwardRef(function Field(
 ): ReactElement {
   return (
     <div>
-      <label htmlFor={id} className="block text-sm font-medium leading-6">
+      <label htmlFor={id} className="block whitespace-nowrap text-sm font-medium leading-6">
         {label}
       </label>
       <input
