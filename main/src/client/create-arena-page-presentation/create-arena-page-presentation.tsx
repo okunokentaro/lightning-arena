@@ -3,8 +3,8 @@
 import { ReactElement } from 'react';
 
 import { ipAtom } from '../ip-atom';
+import { useVerifyPin } from '../pin';
 import { Form } from './form';
-import { useVerifyPin } from './use-verify-pin';
 
 type Props = Readonly<{
   ip: string;
