@@ -17,16 +17,16 @@ export default function RootLayout({
 }: PropsWithChildren): ReactElement {
   // 100svh は iOS 限りの対応
   /* eslint-disable-next-line tailwindcss/no-contradicting-classname */
-  const hScreenWorkAround = clsx('h-[100svh] h-screen');
+  const hScreenWorkAround = clsx('supports-[height:100cqh]:h-[100cqh] supports-[height:100svh]:h-[100svh]');
 
   return (
-    <html lang="en">
+    <html lang="en" >
       <body
         className={clsx(
           inter.className,
           hScreenWorkAround,
           'w-full text-slate-800 dark:text-slate-50',
-          'bg-slate-100 dark:bg-slate-800',
+          'bg-slate-200 dark:bg-slate-800 md:bg-slate-100 dark:md:bg-zinc-900',
         )}
       >
         {children}

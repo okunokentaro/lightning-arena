@@ -1,8 +1,9 @@
 'use client';
 
 import clsx from 'clsx';
+import { ExternalLink } from 'lucide-react';
 import { QRCodeSVG } from 'qrcode.react';
-import { ReactElement } from 'react';
+import { type FocusEvent, ReactElement, useCallback } from 'react';
 
 import { useVerifyCode } from '../code';
 import { ipAtom } from '../ip-atom';
@@ -16,8 +17,11 @@ export function OwnerPagePresentation({ ip }: Props): ReactElement {
   ipAtom.set(ip);
 
   const { isVerified } = useVerifyCode(ip);
-
   const ownerPagePath = `http://${ip}:3000/owner`;
+
+  const handleFocus = useCallback((ev: FocusEvent<HTMLInputElement>) => {
+    ev.target.select();
+  }, []);
 
   if (!isVerified) {
     return (
@@ -25,8 +29,8 @@ export function OwnerPagePresentation({ ip }: Props): ReactElement {
         <div
           className={clsx(
             'flex flex-col rounded-xl p-10',
-            'border border-slate-300 dark:border-slate-900',
-            'bg-slate-200 dark:bg-slate-700',
+            'border border-slate-300 dark:border-zinc-950',
+            'bg-slate-200 dark:bg-slate-800',
           )}
         >
           <p>管理者コードを入力</p>
@@ -42,8 +46,8 @@ export function OwnerPagePresentation({ ip }: Props): ReactElement {
       <div
         className={clsx(
           'flex flex-row divide-x divide-slate-500 rounded-xl py-10',
-          'border border-slate-300 dark:border-slate-900',
-          'bg-slate-200 dark:bg-slate-700',
+          'border border-slate-300 dark:border-zinc-950',
+          'bg-slate-200 dark:bg-slate-800',
         )}
       >
         <div className="px-10">
@@ -72,13 +76,24 @@ export function OwnerPagePresentation({ ip }: Props): ReactElement {
                 />
               </div>
             </div>
-            <div className="flex flex-row justify-center gap-2">
+
+            <div className="flex flex-row items-center justify-center gap-1">
               <p className="text-center text-sm">
-                <a className="text-slate-300 underline" href={ownerPagePath}>
-                  {ownerPagePath}
-                </a>
+                <input
+                  className="bg-transparent p-1 text-slate-300"
+                  value={ownerPagePath}
+                  onFocus={handleFocus}
+                />
               </p>
-              <button>コピー</button>
+
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={ownerPagePath}
+                className="text-slate-300 underline"
+              >
+                <ExternalLink className="text-slate-300" size={16} />
+              </a>
             </div>
           </div>
         </div>

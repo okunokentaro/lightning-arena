@@ -14,10 +14,16 @@ export function Button({ label, disabled }: Props): ReactElement {
       className={clsx(
         'block w-full rounded-md px-3.5 py-2.5 text-center text-sm font-semibold',
         disabled
-          ? 'bg-slate-300 text-slate-400 shadow-none dark:bg-slate-600'
+          ? clsx(
+              'shadow-none',
+              'text-slate-400 dark:text-slate-500',
+              'bg-slate-300 dark:bg-slate-700',
+            )
           : clsx(
-              'bg-sky-600 text-white shadow-sm hover:bg-sky-700 active:bg-sky-800',
-              'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-400',
+              'text-white shadow-sm',
+              'bg-sky-500 hover:bg-sky-600 active:bg-sky-700',
+              'dark:bg-sky-600 dark:hover:bg-sky-700 dark:active:bg-sky-800',
+              'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500 dark:focus-visible:outline-sky-400',
             ),
       )}
     >
