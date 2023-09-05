@@ -2,11 +2,11 @@ import express from 'express';
 import { getLocalIp } from 'universal/src';
 
 import { arenaAtom } from '../../domain/arena';
-import { handle as handleArenaPost } from '../../handlers/arena-post/handle-arena-post';
+import { handle as handleArenaPost } from '../../handlers/arena-post/handle';
 import { handle as handlePresentersPost } from '../../handlers/presenters-post/handle';
-import { handle as handleVerifyPinPost } from '../../handlers/verify-pin-post/handle-arena-post';
+import { handle as handleVerifyCodePost } from '../../handlers/verify-code-post/handle';
+import { codeAtom } from '../code';
 import { handleError } from '../error';
-import { pinAtom } from '../pin';
 import { allowCrossOrigin } from './allow-cross-origin';
 
 const port = 3001;
@@ -32,12 +32,12 @@ export function prepareServer(): void {
   );
 
   app.post(
-    '/verify-pin',
-    handleError((req, res) => handleVerifyPinPost(req, res)),
+    '/verify-code',
+    handleError((req, res) => handleVerifyCodePost(req, res)),
   );
 
   app.listen(port, () => {
     console.info(`App listening on port ${port}`);
-    console.info(`http://${getLocalIp()}:3000?pin=${pinAtom.get()}`);
+    console.info(`http://${getLocalIp()}:3000?code=${codeAtom.get()}`);
   });
 }

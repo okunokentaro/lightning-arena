@@ -14,12 +14,12 @@ const schema = {
   $schema: 'http://json-schema.org/draft-07/schema#',
   type: 'object',
   additionalProperties: false,
-  required: ['pin'],
+  required: ['code'],
   properties: {
-    pin: {
+    code: {
       type: 'string',
       minLength: 4,
-      maxLength: 4,
+      maxLength: 64,
     },
   },
 } as const satisfies JSONSchema7;
@@ -33,5 +33,5 @@ export default function AppPage({ searchParams }: Params): ReactElement {
     }
     throw e;
   }
-  return <AppPagePresentation pin={searchParams.pin} />;
+  return <AppPagePresentation code={searchParams.code} />;
 }
