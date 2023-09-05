@@ -1,14 +1,25 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
-import { useLocalStorage } from 'usehooks-ts';
+import { exists } from 'universal/src';
 
-type Return = Readonly<{
-  isVerified: boolean;
-}>;
+import { useCode } from './use-code';
+
+type Return =
+  | Readonly<{
+      isVerified: boolean;
+      error: null;
+    }>
+  | Readonly<{
+      isVerified: false;
+      error: Error;
+    }>;
+
+export class InvalidCodeError extends Error {}
 
 export function useVerifyCode(ip: string): Return {
   const [isVerified, setIsVerified] = useState<boolean>(false);
-  const [code] = useLocalStorage('laCode', '');
+  const [error, setError] = useState<Error | null>(null);
+  const code = useCode();
   const router = useRouter();
 
   useEffect(() => {
@@ -20,7 +31,7 @@ export function useVerifyCode(ip: string): Return {
       });
 
       if (!res.ok) {
-        router.push('/arena');
+        setError(new InvalidCodeError('forbidden access'));
         return;
       }
 
@@ -30,5 +41,9 @@ export function useVerifyCode(ip: string): Return {
     });
   }, [ip, code, router]);
 
-  return useMemo(() => ({ isVerified }), [isVerified]);
+  return useMemo(() => {
+    return exists(error)
+      ? { isVerified: false, error }
+      : { isVerified, error: null };
+  }, [isVerified, error]);
 }
