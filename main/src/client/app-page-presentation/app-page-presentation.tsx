@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { ReactElement, useEffect } from 'react';
-import { useLocalStorage } from 'usehooks-ts';
+import { useSetCode } from '../code';
 
 type Props = Readonly<{
   code: string;
@@ -10,11 +10,11 @@ type Props = Readonly<{
 
 export function AppPagePresentation({ code }: Props): ReactElement {
   const router = useRouter();
-  const [, setCode] = useLocalStorage('laCode', '');
+  const setCode = useSetCode();
 
   useEffect(() => {
     setCode(code);
-    router.push('/create-arena');
+    router.push('/owner');
   }, [code, router, setCode]);
 
   return <></>;
