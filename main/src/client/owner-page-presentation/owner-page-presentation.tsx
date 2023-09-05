@@ -1,18 +1,17 @@
 'use client';
 
 import { ReactElement } from 'react';
-
+import { useVerifyCode } from '../code';
 import { ipAtom } from '../ip-atom';
-import { useVerifyPin } from '../pin';
 import { Form } from './form';
 
 type Props = Readonly<{
   ip: string;
 }>;
 
-export function CreateArenaPagePresentation({ ip }: Props): ReactElement {
+export function OwnerPagePresentation({ ip }: Props): ReactElement {
   ipAtom.set(ip);
-  const { isVerified } = useVerifyPin(ip);
+  const { isVerified } = useVerifyCode(ip);
 
   return isVerified ? <Form /> : <></>;
 }

@@ -8,7 +8,7 @@ type Props = Readonly<{
   ip: string;
 }>;
 
-export function EntryPagePresentation({ ip }: Props): ReactElement {
+export function UserPagePresentation({ ip }: Props): ReactElement {
   ipAtom.set(ip);
   return <Form />;
 }

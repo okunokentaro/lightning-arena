@@ -2,8 +2,8 @@ import { Request, Response } from 'express';
 import { FromSchema } from 'json-schema-to-ts';
 import { AssertValidJsonError } from 'universal/src/assert-valid-json';
 
+import { codeAtom } from '../../shared/code';
 import { BadRequestError, ForbiddenError } from '../../shared/error';
-import { pinAtom } from '../../shared/pin';
 import { assertValidJson } from '../../utils/assert-valid-json';
 import { requestSchema } from './request-schema';
 
@@ -22,7 +22,7 @@ export function handle(req: Request, res: Response): void {
     throw e;
   }
 
-  if (body.pin !== pinAtom.get()) {
+  if (body.code !== codeAtom.get()) {
     throw new ForbiddenError('invalid');
   }
 

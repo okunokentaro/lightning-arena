@@ -5,17 +5,17 @@ import { ReactElement, useEffect } from 'react';
 import { useLocalStorage } from 'usehooks-ts';
 
 type Props = Readonly<{
-  pin: string;
+  code: string;
 }>;
 
-export function AppPagePresentation({ pin }: Props): ReactElement {
+export function AppPagePresentation({ code }: Props): ReactElement {
   const router = useRouter();
-  const [, setPin] = useLocalStorage('laPin', '');
+  const [, setCode] = useLocalStorage('laCode', '');
 
   useEffect(() => {
-    setPin(pin);
+    setCode(code);
     router.push('/create-arena');
-  }, [pin, router, setPin]);
+  }, [code, router, setCode]);
 
   return <></>;
 }

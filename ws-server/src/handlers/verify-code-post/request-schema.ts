@@ -4,12 +4,12 @@ export const requestSchema = {
   $schema: 'http://json-schema.org/draft-07/schema#',
   type: 'object',
   additionalProperties: false,
-  required: ['pin'],
+  required: ['code'],
   properties: {
-    pin: {
+    code: {
       type: 'string',
       minLength: 4,
-      maxLength: 4,
+      maxLength: 64,
     },
   },
 } as const satisfies JSONSchema7;

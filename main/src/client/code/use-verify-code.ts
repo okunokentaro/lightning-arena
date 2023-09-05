@@ -6,17 +6,17 @@ type Return = Readonly<{
   isVerified: boolean;
 }>;
 
-export function useVerifyPin(ip: string): Return {
+export function useVerifyCode(ip: string): Return {
   const [isVerified, setIsVerified] = useState<boolean>(false);
-  const [pin] = useLocalStorage('laPin', '');
+  const [code] = useLocalStorage('laCode', '');
   const router = useRouter();
 
   useEffect(() => {
     (async (): Promise<void> => {
-      const res = await fetch(`http://${ip}:3001/verify-pin`, {
+      const res = await fetch(`http://${ip}:3001/verify-code`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ pin }),
+        body: JSON.stringify({ code }),
       });
 
       if (!res.ok) {
@@ -28,7 +28,7 @@ export function useVerifyPin(ip: string): Return {
     })().catch((e) => {
       throw e;
     });
-  }, [ip, pin, router]);
+  }, [ip, code, router]);
 
   return useMemo(() => ({ isVerified }), [isVerified]);
 }
