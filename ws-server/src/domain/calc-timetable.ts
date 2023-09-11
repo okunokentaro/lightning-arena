@@ -1,4 +1,4 @@
-import { Readonly } from 'json-schema-to-ts/lib/types/type-utils';
+import { assertExists } from 'universal/src';
 
 type Interval =
   | Readonly<{
@@ -17,7 +17,7 @@ type BreakDefault = Readonly<{
 
 type Arena = Readonly<{
   firstPresentationStartTime: number; // UnixTime ms
-  break: BreakDefault | null;
+  breakDefault: BreakDefault | null;
 }>;
 
 type Entry = Readonly<{
@@ -49,9 +49,12 @@ export function calcTimetable(
           },
         ];
       }
+
+      const last = acc.at(-1) ?? null;
+      assertExists(last);
       return [
         ...acc,
-        { type: 'presentation', entryId: v.id, endAt: v.duration },
+        { type: 'presentation', entryId: v.id, endAt: last.endAt + v.duration },
       ];
     },
     [] as ReturnType<typeof calcTimetable>,
