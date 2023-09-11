@@ -41,7 +41,34 @@ export function calcTimetable(
 
   return entries.reduce(
     (acc, v, i, arr): Temp => {
+      const mandatoryBreakEvery =
+        arena.breakConfig?.mandatoryBreakEvery ?? Number.MAX_SAFE_INTEGER;
+
       if (i === 0) {
+        if (
+          i < arr.length - 1 &&
+          exists(arena.breakConfig) &&
+          mandatoryBreakEvery < v.duration + arr[i + 1].duration
+        ) {
+          return {
+            timetable: [
+              {
+                type: 'presentation',
+                entryId: v.id,
+                endAt: arena.firstPresentationStartTime + v.duration,
+              },
+              {
+                type: 'break',
+                endAt:
+                  arena.firstPresentationStartTime +
+                  v.duration +
+                  arena.breakConfig.duration,
+              },
+            ],
+            sum: v.duration,
+          };
+        }
+
         return {
           timetable: [
             {
@@ -57,7 +84,11 @@ export function calcTimetable(
       const last = acc.timetable.at(-1) ?? null;
       assertExists(last);
 
-      if (exists(arena.breakConfig) && arena.breakConfig.interval <= acc.sum) {
+      if (
+        exists(arena.breakConfig) &&
+        arena.breakConfig.interval <= acc.sum &&
+        last.type !== 'break'
+      ) {
         return {
           timetable: [
             ...acc.timetable,
@@ -74,9 +105,6 @@ export function calcTimetable(
           sum: v.duration,
         };
       }
-
-      const mandatoryBreakEvery =
-        arena.breakConfig?.mandatoryBreakEvery ?? Number.MAX_SAFE_INTEGER;
 
       if (
         i < arr.length - 1 &&
