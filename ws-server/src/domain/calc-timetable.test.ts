@@ -495,6 +495,39 @@ describe('calcTimetable()', () => {
         );
         expect(actual).toEqual(expected);
       });
+
+      test('', () => {
+        const expected = [
+          {
+            type: 'presentation',
+            entryId: '1',
+            endAt: new Date('1970-01-01T00:50:00Z').valueOf(),
+          },
+          {
+            type: 'presentation',
+            entryId: '2',
+            endAt: new Date('1970-01-01T01:40:00Z').valueOf(),
+          },
+        ] as const satisfies ReturnType<typeof calcTimetable>;
+
+        const entries = [
+          { id: '1', duration: 50 * min },
+          { id: '2', duration: 50 * min },
+        ] as const satisfies Entries;
+
+        const actual = calcTimetable(
+          {
+            ...arena,
+            breakConfig: {
+              interval: 51 * min,
+              mandatoryBreakEvery: 100 * min,
+              duration: 10 * min,
+            },
+          },
+          entries,
+        );
+        expect(actual).toEqual(expected);
+      });
     });
   });
 });
