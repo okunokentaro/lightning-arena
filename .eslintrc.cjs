@@ -53,6 +53,7 @@ module.exports = {
     'import-access/jsdoc': ['error', { defaultImportability: 'package' }],
     '@typescript-eslint/explicit-function-return-type': 'error',
     '@next/next/no-html-link-for-pages': 'off',
+    '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
     'react-hooks/rules-of-hooks': 'error',
     'react/react-in-jsx-scope': 'off',
     // eslint 側を無効にして typescript-eslint 側を有効
