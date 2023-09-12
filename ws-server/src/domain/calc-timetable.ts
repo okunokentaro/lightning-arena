@@ -97,9 +97,9 @@ function needsBreak(
   acc: Temp,
 ): boolean {
   const prevSlot = acc.timetable.at(-1) ?? null;
-  assertExists(prevSlot);
 
   return (
+    exists(prevSlot) &&
     exists(breakConfig) &&
     breakConfig.interval <= sum &&
     prevSlot.type !== 'break'
@@ -177,26 +177,15 @@ export function calcTimetable(
 
   return entries.reduce(
     (acc, entry, i, arr): Temp => {
-      const isFirst = i === 0;
-
-      if (isFirst) {
-        insertPresentation(arena, entry, acc);
-        if (shouldInsertBreak(arena, entry, i, arr)) {
-          insertBreak(arena, acc);
-        }
-
-        return acc;
-      }
-
       if (needsBreak(arena.breakConfig, acc.sum, acc)) {
         insertBreak(arena, acc);
         insertPresentation(arena, entry, acc);
-        return acc;
-      }
+      } else {
+        insertPresentation(arena, entry, acc);
 
-      insertPresentation(arena, entry, acc);
-      if (shouldInsertBreak(arena, entry, i, arr)) {
-        insertBreak(arena, acc);
+        if (shouldInsertBreak(arena, entry, i, arr)) {
+          insertBreak(arena, acc);
+        }
       }
 
       return acc;
