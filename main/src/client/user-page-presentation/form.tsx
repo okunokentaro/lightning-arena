@@ -47,47 +47,52 @@ export function Form(): ReactElement {
   );
 
   return (
-    <div
-      className={clsx(
-        'mx-auto flex max-w-3xl rounded-xl p-10',
-        'border border-slate-300 dark:border-slate-900',
-        'bg-slate-200 dark:bg-slate-700',
-      )}
-    >
-      <form
-        className={clsx('flex flex-col gap-12')}
-        onSubmit={(ev): void => {
-          handleSubmit(save)(ev).catch((e) => {
-            throw e;
-          });
-        }}
+    <div className="flex h-full justify-center md:items-center">
+      <div
+        className={clsx(
+          'flex rounded-xl p-6 pt-10 md:p-10',
+          'border-0 border-slate-300 dark:border-zinc-950 md:border',
+          'bg-slate-200 dark:bg-slate-800',
+        )}
       >
-        <div className={clsx('flex flex-col gap-4')}>
-          <h1 className="text-2xl font-semibold">エントリーする</h1>
-          <p>
-            Xアカウント名を入力してください。お持ちでない場合、非公開にしたい場合は名前を入力してください。
-          </p>
-        </div>
+        <form
+          className={clsx('flex flex-col gap-12')}
+          onSubmit={(ev): void => {
+            handleSubmit(save)(ev).catch((e) => {
+              throw e;
+            });
+          }}
+        >
+          <div className={clsx('flex flex-col gap-4')}>
+            <h1 className="text-2xl font-semibold">エントリーする</h1>
+            <div className="flex flex-col gap-1">
+              <p>Xアカウント名を入力してください。</p>
+              <p>
+                お持ちでない場合、非公開にしたい場合は名前を入力してください。
+              </p>
+            </div>
+          </div>
 
-        <div className={clsx('flex flex-col gap-4')}>
-          <Field
-            {...register('xAccountId')}
-            id={'xAccountId'}
-            label={'Xアカウント名'}
-            placeholder={'lightning'}
-          />
+          <div className={clsx('flex flex-col gap-4')}>
+            <Field
+              {...register('xAccountId')}
+              id={'xAccountId'}
+              label={'Xアカウント名'}
+              placeholder={'lightning'}
+            />
 
-          <Field
-            {...register('displayName')}
-            id={'displayName'}
-            label={'名前'}
-            placeholder={'ライトニング'}
-            onFocus={desync}
-          />
-        </div>
+            <Field
+              {...register('displayName')}
+              id={'displayName'}
+              label={'名前'}
+              placeholder={'ライトニング'}
+              onFocus={desync}
+            />
+          </div>
 
-        <Button label={'エントリー'} disabled={disabled} />
-      </form>
+          <Button label={'エントリー'} disabled={disabled} />
+        </form>
+      </div>
     </div>
   );
 }

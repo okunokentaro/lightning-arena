@@ -64,8 +64,8 @@ export function ArenaPagePresentation({ ip, arena }: Props): ReactElement {
             <div
               className={clsx(
                 'mx-auto max-w-3xl rounded-xl p-10',
-                'border border-slate-300 dark:border-slate-900',
-                'bg-slate-200 dark:bg-slate-700',
+                'border border-slate-300 dark:border-zinc-950',
+                'bg-slate-200 dark:bg-slate-800',
               )}
             >
               <div className="p-4">
@@ -83,7 +83,7 @@ export function ArenaPagePresentation({ ip, arena }: Props): ReactElement {
 
         <div
           className={clsx(
-            'flex h-screen w-full items-center justify-center transition-width duration-300 dark:bg-slate-900',
+            'flex h-screen w-full items-center justify-center transition-width duration-300 dark:bg-zinc-900',
             isVisible ? 'w-7/12 max-w-3xl' : 'w-0 max-w-0',
           )}
         >

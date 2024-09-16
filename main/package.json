@@ -4,6 +4,7 @@
     "@nanostores/react": "0.7.1",
     "clsx": "2.0.0",
     "json-schema-to-ts": "2.9.2",
+    "lucide-react": "0.274.0",
     "nanostores": "0.9.3",
     "next": "13.4.19",
     "postcss": "8.4.29",
